@@ -1,6 +1,6 @@
 package com.marketplace.user_auth.filter;
 
-import com.marketplace.user_auth.service.JwtTokenService;
+import com.marketplace.user_auth.util.JwtTokenUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.FilterChain;
@@ -22,14 +22,14 @@ import java.io.IOException;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private final JwtTokenService jwtTokenService;
+    private final JwtTokenUtil jwtTokenUtil;
     private final UserDetailsService userDetailsService;
 
     JwtAuthenticationFilter(
-            JwtTokenService jwtTokenService,
+            JwtTokenUtil jwtTokenUtil,
             UserDetailsService userDetailsService
     ) {
-        this.jwtTokenService = jwtTokenService;
+        this.jwtTokenUtil = jwtTokenUtil;
         this.userDetailsService = userDetailsService;
     }
 
@@ -41,7 +41,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     ) throws IOException, ServletException {
 
         final String authHeader = request.getHeader("Authorization");
-        final String jwt = jwtTokenService.extractFromBearer(authHeader);
+        final String jwt = jwtTokenUtil.extractFromBearer(authHeader);
 
         if (jwt == null) {
             filterChain.doFilter(request, response);
@@ -51,12 +51,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final Claims claims;
 
         try {
-             claims = jwtTokenService.extractClaims(jwt);
+             claims = jwtTokenUtil.extractClaims(jwt);
         } catch (SignatureException e){
             throw new BadCredentialsException("Invalid JWT signature");
         }
 
-        if (jwtTokenService.isClaimsExpired(claims)) {
+        if (jwtTokenUtil.isClaimsExpired(claims)) {
             throw new BadCredentialsException("JWT token expired");
         }
 

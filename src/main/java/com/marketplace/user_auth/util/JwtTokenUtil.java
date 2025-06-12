@@ -1,5 +1,6 @@
-package com.marketplace.user_auth.service;
+package com.marketplace.user_auth.util;
 
+import com.marketplace.user_auth.dto.response.UserResponseDTO;
 import com.marketplace.user_auth.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -15,7 +16,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 @Service
-public class JwtTokenService {
+public class JwtTokenUtil {
     @Value("${jwt.secret}")
     private String jwtSecret;
 
@@ -32,29 +33,29 @@ public class JwtTokenService {
         secretKey = Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
     }
 
-    private String generateToken(User user, HashMap<String, Object> claims, Long expirationMinute) {
+    private String generateToken(UserResponseDTO userResponseDTO, HashMap<String, Object> claims, Long expirationMinute) {
 
         claims.put("jti", UUID.randomUUID().toString());
         return Jwts.builder()
                 .claims(claims)
-                .subject(user.getEmail())
+                .subject(userResponseDTO.getEmail())
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + expirationMinute * 60 * 1000))
                 .signWith(secretKey)
                 .compact();
     }
 
-    public String generateRefreshToken(User user) {
+    public String generateRefreshToken(UserResponseDTO userResponseDTO) {
         HashMap<String, Object> claims = new HashMap<>();
-        return generateToken(user, claims, jwtRefreshTokenExpirationMinute);
+        return generateToken(userResponseDTO, claims, jwtRefreshTokenExpirationMinute);
     }
 
-    public String generateAccessToken(User user) {
+    public String generateAccessToken(UserResponseDTO userResponseDTO) {
         HashMap<String, Object> claims = new HashMap<>();
-        claims.put("id", user.getId());
-        claims.put("email", user.getEmail());
-        claims.put("roles", user.getType().getName());
-        return generateToken(user, claims, jwtAccessTokenExpirationMinute);
+        claims.put("id", userResponseDTO.getId());
+        claims.put("email", userResponseDTO.getEmail());
+        claims.put("roles", userResponseDTO.getType());
+        return generateToken(userResponseDTO, claims, jwtAccessTokenExpirationMinute);
     }
 
     public boolean isClaimsExpired(Claims claims) {

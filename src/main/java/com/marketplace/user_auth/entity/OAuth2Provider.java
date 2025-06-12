@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "id", "user_id" }) })
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "id", "name" }) })
 public class OAuth2Provider {
 
     // google veya githubdan gelen ID

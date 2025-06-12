@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class RegisterRequestDTO {
 
-    @Pattern(regexp = "^[\\p{L}]+$", message = "{customer.create.firstName.only-letter}")
+    @Pattern(regexp = "^[\\p{L}]+(?:[ ]\\p{L}+)*$", message = "{customer.create.firstName.only-letter}")
     @NotBlank
     @Size(min = 2, max = 64)
     private String firstName;
@@ -29,8 +29,4 @@ public class RegisterRequestDTO {
 
     @Phone
     private String phone;
-
-    private String provider; // "google" veya "github"
-
-    private String providerId; // google veya githubdan gelen ID
 }
