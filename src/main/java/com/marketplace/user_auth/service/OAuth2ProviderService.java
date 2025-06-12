@@ -1,7 +1,6 @@
 package com.marketplace.user_auth.service;
 
 import com.marketplace.user_auth.entity.OAuth2Provider;
-import com.marketplace.user_auth.entity.User;
 import com.marketplace.user_auth.repository.OAuth2ProviderRepository;
 import com.marketplace.user_auth.repository.UserRepository;
 import org.springframework.stereotype.Service;

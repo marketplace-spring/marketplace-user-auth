@@ -1,7 +1,6 @@
 package com.marketplace.user_auth.service;
 
 import com.marketplace.user_auth.dto.UserCreateDTO;
-import com.marketplace.user_auth.dto.request.RegisterRequestDTO;
 import com.marketplace.user_auth.dto.response.UserResponseDTO;
 import com.marketplace.user_auth.entity.User;
 import com.marketplace.user_auth.entity.UserStatus;

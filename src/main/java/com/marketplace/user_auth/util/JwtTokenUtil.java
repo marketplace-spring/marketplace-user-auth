@@ -1,7 +1,6 @@
 package com.marketplace.user_auth.util;
 
 import com.marketplace.user_auth.dto.response.UserResponseDTO;
-import com.marketplace.user_auth.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;

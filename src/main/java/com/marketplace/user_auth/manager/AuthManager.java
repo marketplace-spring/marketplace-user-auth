@@ -1,6 +1,5 @@
 package com.marketplace.user_auth.manager;
 
-import com.marketplace.user_auth.dto.TokenCreateDto;
 import com.marketplace.user_auth.dto.UserCreateDTO;
 import com.marketplace.user_auth.dto.request.LoginRequestDTO;
 import com.marketplace.user_auth.dto.request.RegisterRequestDTO;
@@ -9,20 +8,14 @@ import com.marketplace.user_auth.dto.response.TokenResponseDTO;
 import com.marketplace.user_auth.dto.response.UserResponseDTO;
 import com.marketplace.user_auth.entity.OAuth2Provider;
 import com.marketplace.user_auth.mapper.AuthMapper;
-import com.marketplace.user_auth.mapper.TokenMapper;
 import com.marketplace.user_auth.mapper.UserMapper;
 import com.marketplace.user_auth.service.AuthService;
 import com.marketplace.user_auth.service.OAuth2ProviderService;
 import com.marketplace.user_auth.service.TokenService;
 import com.marketplace.user_auth.service.UserService;
-import com.marketplace.user_auth.util.JwtTokenUtil;
-import com.nimbusds.oauth2.sdk.TokenResponse;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;

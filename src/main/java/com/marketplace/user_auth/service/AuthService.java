@@ -1,7 +1,6 @@
 package com.marketplace.user_auth.service;
 
 import com.marketplace.user_auth.dto.TokenCreateDto;
-import com.marketplace.user_auth.dto.response.AuthResponse;
 import com.marketplace.user_auth.dto.response.TokenResponseDTO;
 import com.marketplace.user_auth.dto.response.UserResponseDTO;
 import com.marketplace.user_auth.mapper.TokenMapper;
