@@ -27,6 +27,7 @@ public class RegisterRequestDTO {
     @NotBlank
     private String password;
 
-    @Phone
+    @Pattern(regexp = "^\\d{11,13}$", message = "Invalid phone number")
     private String phone;
+
 }
